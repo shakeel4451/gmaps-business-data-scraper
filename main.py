@@ -1,6 +1,7 @@
 from playwright.sync_api import sync_playwright
 import pandas as pd
 import time
+import re
 
 def scrape_google_maps(search_query):
   leads=[]
@@ -55,8 +56,10 @@ def scrape_google_maps(search_query):
         for line in lines:
           if "(" in line and ")" in line and "." in line[:5]:
             rating=line
-          elif "+" in line or "-" in line or (line.replace(" ","").isdigit() and len(line)>8):
-            phone=line
+          
+          phone_match=re.search(r'(\+?\d[\d\s-]{8,}\d)',line)
+          if phone_match:
+            phone=phone_match.group(1).strip()
 
         if name and name!="Sponsored":
           leads.append({
