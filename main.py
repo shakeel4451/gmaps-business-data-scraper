@@ -16,3 +16,11 @@ def scrape_google_maps(search_query):
 
     print(f"🌍 Navigating to Google Maps...")
     page.goto(target_url,timeout=60000)
+
+    try:
+      page.wait_for_selector('div[role="feed"]')
+      print("✅ Feed located. Starting Targeted Infinite Scroll...")
+    except Exception:
+      print("❌ Could not find the results panel. Google might be showing a different layout.")
+      browser.close()
+      return
