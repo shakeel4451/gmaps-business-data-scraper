@@ -24,3 +24,13 @@ def scrape_google_maps(search_query):
       print("❌ Could not find the results panel. Google might be showing a different layout.")
       browser.close()
       return
+    
+    for _ in range(5):
+      page.evaluate("""
+        let feed=document.querySelector('div[role="feed"]');
+        if(feed){
+          feed.scrollBy(0,1000);
+        }
+      """)
+      print("⏬ Scrolling panel down...")
+      time.sleep(2.5)
