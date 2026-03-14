@@ -188,7 +188,7 @@ Example data format:
 
 # 📂 Project Structure
 
-gmaps-buisness-data-scraper
+gmaps-business-data-scraper
 │
 ├── main.py
 ├── requirements.txt
@@ -207,8 +207,8 @@ gmaps-buisness-data-scraper
 ## 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/gmaps-buisness-data-scraper.git
-cd gmaps-buisness-data-scraper
+git clone https://github.com/yourusername/gmaps-business-data-scraper.git
+cd gmaps-business-data-scraper
 ```
 
 ---
