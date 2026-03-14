@@ -25,7 +25,7 @@ The project demonstrates **advanced DOM manipulation** by bypassing traditional 
 div[role="feed"]
 ```
 
-This allows the scraper to trigger **Google Maps infinite scrolling APIs** and collect large datasets efficiently.
+This allow the scraper to trigger **Google Maps infinite scrolling APIs** and collect large datasets efficiently.
 
 ---
 
