@@ -47,7 +47,7 @@ def scrape_google_maps(search_query):
 
         lines=card_text.split('\n')
         name=lines[0]
-       # name=name[:30]
+        name=name[:30]
 
         rating="N/A"
         phone="N/A"
