@@ -35,37 +35,38 @@ def scrape_google_maps(search_query):
       print("⏬ Scrolling panel down...")
       time.sleep(2.5)
 
-  cards=page.locator('div[role="feed"] > div').all()
-  print(f"📦 Found {len(cards)} potential elements. Extracting data...")
+    cards=page.locator('div[role="feed"] > div').all()
+    print(f"📦 Found {len(cards)} potential elements. Extracting data...")
 
-  for card in cards:
-    try:
-      card_text=card.inner_text()
+    for card in cards:
+      try:
+        card_text=card.inner_text()
 
-      if not card_text or len(card_text.split('\n'))<3:
-        continue
+        if not card_text or len(card_text.split('\n'))<3:
+          continue
 
-      lines=card_text.split('\n')
-      name=lines[0]
+        lines=card_text.split('\n')
+        name=lines[0]
+       # name=name[:30]
 
-      rating="N/A"
-      phone="N/A"
+        rating="N/A"
+        phone="N/A"
 
-      for line in lines:
-        if "(" in line and ")" in line and "." in line[:5]:
-          rating=line
-        elif "+" in line or "-" in line or (line.replace(" ","").isdigit() and len(line)>8):
-          phone=line
+        for line in lines:
+          if "(" in line and ")" in line and "." in line[:5]:
+            rating=line
+          elif "+" in line or "-" in line or (line.replace(" ","").isdigit() and len(line)>8):
+            phone=line
 
-      if name and name!="Sponsored":
-        leads.append({
-          "Buisness Name": name,
-          "Rating and Reviews":rating,
-          "Contact Info":phone
-        })
-        print(f"✅ Harvested: {name[:30]}... | {phone}")
-    except Exception as e:
-      print(f"issue is : {e}")
+        if name and name!="Sponsored":
+          leads.append({
+            "Buisness Name": name,
+            "Rating and Reviews":rating,
+            "Contact Info":phone
+          })
+          print(f"✅ Harvested: {name[:30]}... | {phone}")
+      except Exception as e:
+        print(f"issue is : {e}")
 
     if leads:
       df=pd.DataFrame(leads).drop_duplicates(subset=["Buisness Name"])
@@ -77,3 +78,4 @@ def scrape_google_maps(search_query):
 
     browser.close()
 
+scrape_google_maps("Software Houses in Johar Town Lahore")
