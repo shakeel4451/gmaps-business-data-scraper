@@ -56,5 +56,24 @@ def scrape_google_maps(search_query):
           rating=line
         elif "+" in line or "-" in line or (line.replace(" ","").isdigit() and len(line)>8):
           phone=line
-    except:
-      print()
+
+      if name and name!="Sponsored":
+        leads.append({
+          "Buisness Name": name,
+          "Rating and Reviews":rating,
+          "Contact Info":phone
+        })
+        print(f"✅ Harvested: {name[:30]}... | {phone}")
+    except Exception as e:
+      print(f"issue is : {e}")
+
+    if leads:
+      df=pd.DataFrame(leads).drop_duplicates(subset=["Buisness Name"])
+      filename=f"{search_query.replace(' ','_')}_lead.xlsx"
+      df.to_excel(filename,index=False)
+      print(f"\n 📊 SUCCESS! Saved {len(df)} unique leads to {filename}")
+    else:
+      print("❌ No leads harvested.")
+
+    browser.close()
+
