@@ -34,3 +34,21 @@ def scrape_google_maps(search_query):
       """)
       print("⏬ Scrolling panel down...")
       time.sleep(2.5)
+
+  cards=page.locator('div[role="feed"] > div').all()
+  print(f"📦 Found {len(cards)} potential elements. Extracting data...")
+
+  for card in cards:
+    try:
+      card_text=card.inner_text()
+
+      if not card_text or len(card_text.split('\n'))<3:
+        continue
+
+      lines=card_text.split('\n')
+      name=lines[0]
+
+      rating="N/A"
+      phone="N/A"
+    except:
+      print()
