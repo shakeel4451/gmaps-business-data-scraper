@@ -50,5 +50,11 @@ def scrape_google_maps(search_query):
 
       rating="N/A"
       phone="N/A"
+
+      for line in lines:
+        if "(" in line and ")" in line and "." in line[:5]:
+          rating=line
+        elif "+" in line or "-" in line or (line.replace(" ","").isdigit() and len(line)>8):
+          phone=line
     except:
       print()
